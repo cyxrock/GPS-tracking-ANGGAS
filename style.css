@@ -1,0 +1,148 @@
+/* Reset dasar untuk konsistensi */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: 'Roboto', sans-serif;
+    background: #ecf0f1;
+    color: #2c3e50;
+    padding: 0;
+    margin: 0;
+  }
+  
+  /* Header - Desain menarik dengan bayangan */
+  header {
+    background-color: #34495e;
+    color: white;
+    text-align: center;
+    padding: 25px 0;
+    font-size: 32px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-bottom: 4px solid #1abc9c;
+  }
+  
+  /* Kontainer utama */
+  .container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  #map {
+    height: 450px;
+    width: 100%;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    margin-bottom: 30px;
+  }
+  
+  /* Tombol - Desain modern dengan efek hover */
+  .buttons {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-bottom: 25px;
+  }
+  
+  .buttons button {
+    padding: 14px 25px;
+    font-size: 18px;
+    border-radius: 8px;
+    border: none;
+    background-color: #1abc9c;
+    color: white;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    cursor: pointer;
+  }
+  
+  .buttons button:hover {
+    background-color: #16a085;
+    transform: scale(1.05);
+  }
+  
+  .buttons button:active {
+    transform: scale(0.98);
+  }
+  
+  /* Kotak data - Desain konten dengan bayangan */
+  .data-box {
+    background-color: white;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 50px;
+  }
+  
+  .data-box p {
+    margin: 10px 0;
+    font-size: 18px;
+    line-height: 1.6;
+  }
+  
+  .data-box p strong {
+    color: #34495e;
+  }
+  
+  /* Responsif - Desain untuk perangkat kecil */
+  @media (max-width: 768px) {
+    header {
+      font-size: 28px;
+      padding: 20px 0;
+    }
+  
+    .buttons button {
+      font-size: 16px;
+      padding: 12px 20px;
+      min-width: 150px;
+    }
+  
+    #map {
+      height: 400px;
+    }
+  
+    .data-box {
+      padding: 15px;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    header {
+      font-size: 24px;
+      padding: 15px 0;
+    }
+  
+    .buttons button {
+      font-size: 14px;
+      padding: 10px 15px;
+      min-width: 120px;
+    }
+  
+    .data-box p {
+      font-size: 16px;
+    }
+  
+    #map {
+      height: 350px;
+    }
+  }
+  
+  /* Animasi saat memuat data */
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  
+  .data-box p {
+    animation: fadeIn 1s ease-out;
+  }
+  
