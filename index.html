@@ -1,50 +1,104 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>GPS TRACKER ANGGAS</title>
-  
-  <!-- Google Fonts -->
+  <title>GPS Tracking ANGGAS</title>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
-  <!-- Leaflet CSS -->
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" />
-  <!-- Custom CSS -->
   <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" />
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    #map {
+      height: 400px;
+      width: 100%;
+    }
+
+    .data-box {
+      padding: 15px;
+      background: #f4f4f4;
+      margin: 10px;
+      box-sizing: border-box;
+    }
+
+    .data-box p {
+      margin: 6px 0;
+    }
+
+    .buttons {
+      margin: 10px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-evenly;
+    }
+
+    .buttons button {
+      padding: 10px 20px;
+      font-size: 16px;
+      margin: 5px;
+      cursor: pointer;
+      width: 45%;
+    }
+
+    @media (max-width: 600px) {
+      #map {
+        height: 300px; /* Sesuaikan tinggi peta di perangkat kecil */
+      }
+
+      .buttons button {
+        width: 100%; /* Tombol menjadi lebar penuh di layar kecil */
+        margin: 5px 0;
+      }
+
+      .data-box {
+        padding: 10px;
+      }
+    }
+
+    footer {
+      background-color: #333;
+      color: white;
+      text-align: center;
+      padding: 10px 0;
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+    }
+
+    footer p {
+      margin: 0;
+      font-size: 14px;
+    }
+  </style>
 </head>
 <body>
-  
-  <!-- Header -->
-  <header>
-    <h1>GPS TRACKER ANGGAS</h1>
-  </header>
+  <h2 style="padding:15px;">GPS Tracking ANGGAS</h2>
 
-  <!-- Main Container -->
-  <div class="container">
-    <!-- Map -->
-    <div id="map"></div>
+  <div id="map"></div>
 
-    <!-- Buttons Section -->
-    <div class="buttons">
-      <button id="startBtn">Mulai Tracking</button>
-      <button id="endBtn">Akhiri Tracking</button>
-      <button id="resetBtn">Reset Tracking</button>
-      <button id="saveBtn">Save Tracking</button>
-    </div>
+  <div class="buttons">
+    <button id="startBtn">Mulai Tracking</button>
+    <button id="endBtn">Akhiri Tracking</button>
+    <button id="resetBtn">Reset Tracking</button>
+    <button id="saveBtn">Save Tracking</button>
+  </div>
 
-    <!-- Data Section -->
-    <div class="data-box">
-      <p><strong>Waktu:</strong> <span id="time">-</span></p>
-      <p><strong>Latitude:</strong> <span id="lat">-</span></p>
-      <p><strong>Longitude:</strong> <span id="lng">-</span></p>
-      <p><strong>Altitude:</strong> <span id="alt">-</span> mdpl</p>
-      <p><strong>Suhu:</strong> <span id="suhu">-</span> °C</p>
-      <p><strong>Kelembaban:</strong> <span id="lembab">-</span> %</p>
-      <p><strong>Kecepatan:</strong> <span id="kecepatan">-</span> km/h</p>
-      <p><strong>Gyro X:</strong> <span id="gx">-</span></p>
-      <p><strong>Gyro Y:</strong> <span id="gy">-</span></p>
-      <p><strong>Gyro Z:</strong> <span id="gz">-</span></p>
-    </div>
+  <div class="data-box">
+    <p><strong>Waktu:</strong> <span id="time">-</span></p>
+    <p><strong>Latitude:</strong> <span id="lat">-</span></p>
+    <p><strong>Longitude:</strong> <span id="lng">-</span></p>
+    <p><strong>Altitude:</strong> <span id="alt">-</span> mdpl</p>
+    <p><strong>Suhu:</strong> <span id="suhu">-</span> °C</p>
+    <p><strong>Kelembaban:</strong> <span id="lembab">-</span> %</p>
+    <p><strong>Kecepatan:</strong> <span id="kecepatan">-</span> km/h</p>
+    <p><strong>Gyro X:</strong> <span id="gx">-</span></p>
+    <p><strong>Gyro Y:</strong> <span id="gy">-</span></p>
+    <p><strong>Gyro Z:</strong> <span id="gz">-</span></p>
   </div>
 
   <!-- Firebase + Leaflet JS -->
@@ -217,7 +271,11 @@
     }, 1000);
   </script>
 
-  <!-- Leaflet JS -->
   <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"></script>
+
+  <!-- Copyright Footer -->
+  <footer>
+    <p>&copy; 2025 Anggas. All rights reserved.</p>
+  </footer>
 </body>
 </html>
