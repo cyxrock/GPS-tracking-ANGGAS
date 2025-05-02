@@ -1,48 +1,50 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<link rel="stylesheet" href="style.css" />
-
   <meta charset="UTF-8">
-  <title>GPS Tracking ANGGAS</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GPS TRACKER ANGGAS</title>
+  
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+  <!-- Leaflet CSS -->
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" />
-  <style>
-    body { font-family: Arial; margin: 0; padding: 0; }
-    #map { height: 400px; width: 100%; }
-    .data-box { padding: 15px; background: #f4f4f4; }
-    .data-box p { margin: 6px 0; }
-    .buttons { margin: 10px 15px; }
-    .buttons button {
-      padding: 10px 20px;
-      font-size: 16px;
-      margin-right: 10px;
-      cursor: pointer;
-    }
-  </style>
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+  
+  <!-- Header -->
+  <header>
+    <h1>GPS TRACKER ANGGAS</h1>
+  </header>
 
-  <h2 style="padding:15px;">GPS Tracking ANGGAS</h2>
+  <!-- Main Container -->
+  <div class="container">
+    <!-- Map -->
+    <div id="map"></div>
 
-  <div id="map"></div>
+    <!-- Buttons Section -->
+    <div class="buttons">
+      <button id="startBtn">Mulai Tracking</button>
+      <button id="endBtn">Akhiri Tracking</button>
+      <button id="resetBtn">Reset Tracking</button>
+      <button id="saveBtn">Save Tracking</button>
+    </div>
 
-  <div class="buttons">
-    <button id="startBtn">Mulai Tracking</button>
-    <button id="endBtn">Akhiri Tracking</button>
-    <button id="resetBtn">Reset Tracking</button>
-    <button id="saveBtn">Save Tracking</button>
-  </div>
-
-  <div class="data-box">
-    <p><strong>Waktu:</strong> <span id="time">-</span></p>
-    <p><strong>Latitude:</strong> <span id="lat">-</span></p>
-    <p><strong>Longitude:</strong> <span id="lng">-</span></p>
-    <p><strong>Suhu:</strong> <span id="suhu">-</span> °C</p>
-    <p><strong>Kelembaban:</strong> <span id="lembab">-</span> %</p>
-    <p><strong>Kecepatan:</strong> <span id="kecepatan">-</span> km/h</p>
-    <p><strong>Gyro X:</strong> <span id="gx">-</span></p>
-    <p><strong>Gyro Y:</strong> <span id="gy">-</span></p>
-    <p><strong>Gyro Z:</strong> <span id="gz">-</span></p>
+    <!-- Data Section -->
+    <div class="data-box">
+      <p><strong>Waktu:</strong> <span id="time">-</span></p>
+      <p><strong>Latitude:</strong> <span id="lat">-</span></p>
+      <p><strong>Longitude:</strong> <span id="lng">-</span></p>
+      <p><strong>Altitude:</strong> <span id="alt">-</span> mdpl</p>
+      <p><strong>Suhu:</strong> <span id="suhu">-</span> °C</p>
+      <p><strong>Kelembaban:</strong> <span id="lembab">-</span> %</p>
+      <p><strong>Kecepatan:</strong> <span id="kecepatan">-</span> km/h</p>
+      <p><strong>Gyro X:</strong> <span id="gx">-</span></p>
+      <p><strong>Gyro Y:</strong> <span id="gy">-</span></p>
+      <p><strong>Gyro Z:</strong> <span id="gz">-</span></p>
+    </div>
   </div>
 
   <!-- Firebase + Leaflet JS -->
@@ -118,9 +120,9 @@
         return;
       }
 
-      let content = "Waktu,Latitude,Longitude,Suhu,Kelembaban,Kecepatan,GyroX,GyroY,GyroZ\n";
+      let content = "Waktu,Latitude,Longitude,Altitude,Suhu,Kelembaban,Kecepatan,GyroX,GyroY,GyroZ\n";
       trackingData.forEach(entry => {
-        content += `${entry.time},${entry.lat},${entry.lng},${entry.suhu},${entry.lembab},${entry.kecepatan},${entry.gx},${entry.gy},${entry.gz}\n`;
+        content += `${entry.time},${entry.lat},${entry.lng},${entry.alt},${entry.suhu},${entry.lembab},${entry.kecepatan},${entry.gx},${entry.gy},${entry.gz}\n`;
       });
 
       const blob = new Blob([content], { type: 'text/plain' });
@@ -145,16 +147,18 @@
         const lat = parseFloat(data["02_lat"]);
         const lng = parseFloat(data["03_lng"]);
         const waktu = data["01_waktu"];
-        const suhu = data["04_suhu"];
-        const kelembaban = data["05_lembab"];
-        const kecepatan = parseFloat(data["06_kecepatan"]).toFixed(2);
-        const gx = data["07_gyro_x"];
-        const gy = data["08_gyro_y"];
-        const gz = data["09_gyro_z"];
+        const altitude = data["04_altitude"];
+        const suhu = data["05_suhu"];
+        const kelembaban = data["06_lembab"];
+        const kecepatan = parseFloat(data["07_kecepatan"]).toFixed(2);
+        const gx = data["08_gyro_x"];
+        const gy = data["09_gyro_y"];
+        const gz = data["10_gyro_z"];
 
         document.getElementById('time').innerText = waktu;
         document.getElementById('lat').innerText = lat;
         document.getElementById('lng').innerText = lng;
+        document.getElementById('alt').innerText = altitude;
         document.getElementById('suhu').innerText = suhu;
         document.getElementById('lembab').innerText = kelembaban;
         document.getElementById('kecepatan').innerText = kecepatan;
@@ -187,6 +191,7 @@
               <strong>Suhu:</strong> ${suhu} °C<br>
               <strong>Kelembaban:</strong> ${kelembaban} %<br>
               <strong>Kecepatan:</strong> ${kecepatan} km/h<br>
+              <strong>Altitude:</strong> ${altitude} mdpl<br>
               <strong>Gyro X:</strong> ${gx}<br>
               <strong>Gyro Y:</strong> ${gy}<br>
               <strong>Gyro Z:</strong> ${gz}
@@ -198,6 +203,7 @@
               time: waktu,
               lat: lat,
               lng: lng,
+              alt: altitude,
               suhu: suhu,
               lembab: kelembaban,
               kecepatan: kecepatan,
@@ -211,6 +217,7 @@
     }, 1000);
   </script>
 
+  <!-- Leaflet JS -->
   <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"></script>
 </body>
 </html>
