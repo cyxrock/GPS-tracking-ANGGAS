@@ -273,6 +273,32 @@
   </script>
 
   <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"></script>
+  <script>
+    let wakeLock = null;
+  
+    async function requestWakeLock() {
+      try {
+        wakeLock = await navigator.wakeLock.request('screen');
+        console.log('Wake Lock aktif');
+        wakeLock.addEventListener('release', () => {
+          console.log('Wake Lock dilepas');
+        });
+      } catch (err) {
+        console.error(`${err.name}, ${err.message}`);
+      }
+    }
+  
+    document.addEventListener('visibilitychange', () => {
+      if (wakeLock !== null && document.visibilityState === 'visible') {
+        requestWakeLock();
+      }
+    });
+  
+    // Aktifkan wake lock saat user klik "Mulai Tracking"
+    document.getElementById("startBtn").addEventListener("click", () => {
+      requestWakeLock();
+    });
+  </script>  
 
   <!-- Copyright Footer -->
   <div style="height: 40px;"></div> <!-- Spacer agar footer tidak menghalangi -->
