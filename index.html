@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>GPS TRACKER ANGGAS</title>
+  <title>WEB TRACKER ANGGAS</title>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css" />
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" />
@@ -75,9 +75,11 @@
       font-size: 14px;
     }
   </style>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 </head>
 <body>
-  <h2 style="padding:15px;">GPS TRACKER ANGGAS</h2>
+  <h2 style="padding:15px;">WEB TRACKER ANGGAS</h2>
 
   <div id="map"></div>
 
@@ -145,7 +147,14 @@
       polyline.setLatLngs([]);
       if (startMarker) map.removeLayer(startMarker);
       if (endMarker) map.removeLayer(endMarker);
-      alert("Tracking dimulai");
+      Swal.fire({
+      icon: 'success',
+      title: 'Tracking Dimulai!',
+      text: 'Perangkat sedang melacak lokasi.',
+      timer: 2000,
+      showConfirmButton: false
+    });
+
     });
 
     document.getElementById("endBtn").addEventListener("click", () => {
@@ -154,7 +163,13 @@
         const lastPoint = path[path.length - 1];
         endMarker = L.marker(lastPoint).addTo(map).bindPopup("End of journey").openPopup();
       }
-      alert("Tracking dihentikan");
+      Swal.fire({
+      icon: 'info',
+      title: 'Tracking Dihentikan',
+      text: 'Pelacakan lokasi telah berhenti.',
+      timer: 2000,
+      showConfirmButton: false
+    });
     });
 
     document.getElementById("resetBtn").addEventListener("click", () => {
@@ -166,12 +181,22 @@
       markerPoints = [];
       if (startMarker) map.removeLayer(startMarker);
       if (endMarker) map.removeLayer(endMarker);
-      alert("Tracking telah direset");
+      Swal.fire({
+      icon: 'warning',
+      title: 'Tracking Direset',
+      text: 'Data tracking telah dihapus.',
+      timer: 2000,
+      showConfirmButton: false
+    });
     });
 
     document.getElementById("saveBtn").addEventListener("click", () => {
       if (trackingData.length === 0) {
-        alert("Belum ada data tracking untuk disimpan");
+        Swal.fire({
+        icon: 'error',
+        title: 'Gagal Menyimpan',
+        text: 'Belum ada data tracking untuk disimpan.',
+      });
         return;
       }
 
@@ -269,7 +294,7 @@
           }
         }
       }, { onlyOnce: true });
-    }, 1000);
+    }, 2000);
   </script>
 
   <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"></script>
